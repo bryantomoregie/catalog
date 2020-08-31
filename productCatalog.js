@@ -63,8 +63,8 @@ function createTableHeader(tableId){
 function updateTable(tableId,productArray){
     var tableBody = document.getElementById(tableId);
     //reset table
-    while (tableBody.hasChildNodes()) {Â Â  
-Â Â Â      tableBody.removeChild(tableBody.firstChild);
+    while (tableBody.hasChildNodes()) {
+    tableBody.removeChild(tableBody.firstChild);
     }
     //create table header
     createTableHeader(tableId);
