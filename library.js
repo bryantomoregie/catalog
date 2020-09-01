@@ -41,7 +41,6 @@
         }
 
         function searchProductById(id){
-
             var promise = new Promise(function(resolve,reject){
                 var i = 0;
                 setTimeout(function(){
@@ -57,8 +56,7 @@
             return promise;
         }
 
-        function searchProductsByType(type){
-
+        function searchProductsByType(type){ //returns an array of matching types as the resolve value of this promise 
             var promise = new Promise(function(resolve,reject){
                 var i = 0;
                 var typeArray = [];
@@ -81,22 +79,22 @@
             return promise;
         }
 
-        function searchProductsByPrice(price,difference){
+        function searchProductsByPrice(price,difference){ 
             var promise = new Promise(function(resolve,reject){
                 var i = 0;
                 var priceArray = [];
-                if(!isFinite(price)){
+                if(!isFinite(price)){ //is a finite number
                     reject("Invalid Price: " + price)
                 }
                 else{
                     setTimeout(function(){
                         while (i < catalog.length){
-                            if (Math.abs(catalog[i].price - price) < difference){
-                                priceArray.push({id:catalog[i].id,price:catalog[i].price,type:catalog[i].type});
+                            if (Math.abs(catalog[i].price - price) < difference){ //returns the absolute difference 
+                                priceArray.push({id:catalog[i].id,price:catalog[i].price,type:catalog[i].type}); //if absolute difference is less than the difference, push into the array
                             }
                             i++;
                         }
-                        resolve(priceArray);
+                        resolve(priceArray); //if resolved, send the array as a value
                     },1000);
                 }
             });
