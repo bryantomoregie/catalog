@@ -102,3 +102,60 @@ document.getElementById("inputButton").addEventListener('click',function(){
     processSearch(document.getElementById('input').value);
 });
 
+
+function searchSimilarProducts(type, allProducts) {
+    var possibleTypes = ['Electronics','Book','Clothing','Food'];
+    let arr = []
+    if(!possibleTypes.includes(type)){
+        alert("Invalid Type: " + type)
+    } else {
+        allProducts.forEach( product => {
+            if(product.type === type){
+                arr.push(product)
+            }
+        })
+    }
+    
+   
+
+    return arr
+}
+
+
+function findAllTypes(string){
+    api.searchAllProducts().then((val) => {
+        updateTable("similarTable" , searchSimilarProducts(string, val))
+    })
+}
+
+function similarPriceProducts(string){
+    let int = parseInt(string)
+    api.searchProductsByPrice(int, 50).then((value) => {
+        updateTable('similarTable', value)
+    })
+
+}
+
+document.getElementById("inputTypeButton").addEventListener('click', () => {
+    findAllTypes(document.getElementById('typeInput').value)
+})
+
+document.getElementById("inputPriceButton").addEventListener('click', () => {
+    similarPriceProducts(document.getElementById("priceInput").value)
+})
+
+/*   
+
+onCLick event on search price button that triggers a function that will return an array or
+products with the array that is $50 less or $50 more 
+
+Get the button from the HTMl //
+add onclick event that triggers searchProductsByPrice //
+pass in the input value and 50 as arguments //
+A promise is returend whos value is the array of the products //
+pass that array in to the updateTable function 
+
+
+*/
+
+
